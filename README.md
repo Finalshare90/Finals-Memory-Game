@@ -1,2 +1,3 @@
 # Finals-Memory-Game
-A costumizable and simple puzzle game loader.
+A costumizable, bug loaded and simple puzzle game loader.
+
