@@ -25,6 +25,7 @@ public class MemoryGame extends ApplicationAdapter {
 	Deck deck;
 	OrthographicCamera cam;
 	PlayerSelector player;
+	public static List<Deck> DECK_INSTANCE_CONTROLLER = new ArrayList<>();
 	
 	@Override
 	public void create () {
@@ -78,7 +79,9 @@ public class MemoryGame extends ApplicationAdapter {
 		
 		deck = new Deck(cardList, 3, 40);
 		
-		player = new PlayerSelector(deck);
+		DECK_INSTANCE_CONTROLLER.add(deck);
+		
+		player = new PlayerSelector(DECK_INSTANCE_CONTROLLER.get(0), 3, 40);
 		
 		cam = new OrthographicCamera(1200,1200);
 		
@@ -99,7 +102,7 @@ public class MemoryGame extends ApplicationAdapter {
 		player.update();
 		
 		batch.begin();
-		deck.render(batch);
+		DECK_INSTANCE_CONTROLLER.get(0).render(batch);
 		player.render(batch);
 		batch.end();
 	}

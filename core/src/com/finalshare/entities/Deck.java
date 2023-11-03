@@ -10,8 +10,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Deck {
 	
 	private List<Card> cardList = new ArrayList<>();
+	public List<Card> cardListCopy;
 	Card[] cardSelection = new Card[2];
 	int rowSize;
+	
+	public List<Card> copyList(List<Card> list) {
+		
+		List<Card> listBuffer = new ArrayList<Card>();
+		
+		for(int count = 0; list.size() > count; count++) {
+			listBuffer.add(list.get(count));
+		}
+		
+		return listBuffer;
+	}
 	
 	// Starts a empty deck.
 	public Deck() {}
@@ -23,9 +35,14 @@ public class Deck {
 	 * */
 	public Deck(List<Card> cardList, int rowSize, int gap) {
 		this.cardList = cardList;
-		sortDeck(this.cardList);
+		
+		//sortDeck(this.cardList);
+		
 		setCardPosition(rowSize, gap, cardList);
+		
 		this.rowSize = rowSize;
+		
+		cardListCopy = copyList(cardList);
 	}
 	
 	private void setCardPosition(int rowSize, int gap, List<Card> cardList) {
@@ -79,6 +96,19 @@ public class Deck {
 	
 	public void addSelected(Card card){
 
+		
+		
+		
+		
+		if(card != cardSelection[0] && card != cardSelection[1]) {
+			cardSelection[selected] = card;
+			selected++;
+		}
+		
+	}
+	
+	public void updateSelection() {
+		
 		if(checkPair()) {
 			
 			System.out.println("pair!");
@@ -91,17 +121,12 @@ public class Deck {
 			System.out.println(cardSelection[1]);
 		}
 		
-		if(selected == 2) {	
+		if(cardSelection[0] != null && cardSelection[1] != null) {	
 			if(cardSelection[0] != cardSelection[1]) {
 				flipCards();
 			}
 			removeFromSelection();
 			selected = 0;	
-		}
-		
-		if(card != cardSelection[0] && card != cardSelection[1]) {
-			cardSelection[selected] = card;
-			selected++;
 		}
 		
 	}
@@ -169,14 +194,14 @@ public class Deck {
 	 * */ 
 	public boolean checkPair() {
 		
-		
+
 		try {
 			checkForNull(this.cardSelection);
 		}catch (Exception e) {
-			System.err.println("Selection needs extra element");
 			return false;
 		}
 		
+	
 		
 		if(this.cardSelection[0].getPair() == cardSelection[1]){
 			return true;
