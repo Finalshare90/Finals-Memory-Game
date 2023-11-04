@@ -32,13 +32,21 @@ public class PlayerSelector {
 		float x, y;
 		
 		if(deck.getCardList().size() != 0) {
+			
 			try {
 				x = deck.getCardList().get(selectionPointer).getSprite().getX();
 				y = deck.getCardList().get(selectionPointer).getSprite().getY();
 			}catch (Exception e) {
-				x = deck.getCardList().get(selectionPointer - 1).getSprite().getX();
-				y = deck.getCardList().get(selectionPointer - 1).getSprite().getY();
-				selectionPointer = selectionPointer - 1;
+				
+				int indexToRollBack = 1;
+				
+				while (selectionPointer - indexToRollBack >= deck.getCardList().size()) {
+					indexToRollBack = indexToRollBack + 1;
+				}
+				
+				x = deck.getCardList().get(selectionPointer - indexToRollBack).getSprite().getX();
+				y = deck.getCardList().get(selectionPointer - indexToRollBack).getSprite().getY();
+				selectionPointer = selectionPointer - indexToRollBack;
 			}
 			sprite.setPosition(x,y); 
 		
@@ -55,7 +63,6 @@ public class PlayerSelector {
 		try {
 			currentCard = deck.getCardList().get(selectionPointer);			
 			} catch (Exception e) {
-				//e.printStackTrace();
 				currentCard = new Card("place holder");
 			}
 		
@@ -94,7 +101,20 @@ public class PlayerSelector {
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			deck.addSelected(currentCard);
+			
+			boolean isSameCard = false;
+			
+			for(int cycle = 0; cycle < deck.cardSelection.length; cycle++) {
+				if(currentCard == deck.cardSelection[cycle]) {
+					deck.cardSelection[cycle] = null;
+					deck.selected--;
+					isSameCard = true;
+				}
+			}
+			
+			if(!isSameCard) {
+				deck.addSelected(currentCard);				
+			}
 			currentCard.flipped = !currentCard.flipped;
 		}
 		

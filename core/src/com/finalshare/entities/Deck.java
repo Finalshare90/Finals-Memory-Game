@@ -92,14 +92,9 @@ public class Deck {
 		
 	}
 
-	private int selected = 0;
+	public int selected = 0;
 	
 	public void addSelected(Card card){
-
-		
-		
-		
-		
 		if(card != cardSelection[0] && card != cardSelection[1]) {
 			cardSelection[selected] = card;
 			selected++;
