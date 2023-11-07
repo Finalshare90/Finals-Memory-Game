@@ -36,7 +36,11 @@ public class Deck {
 	public Deck(List<Card> cardList, int rowSize, int gap) {
 		this.cardList = cardList;
 		
-		//sortDeck(this.cardList);
+		sortDeck(this.cardList);
+		
+		for(Card card : cardList) {
+			card.label = null;
+		}
 		
 		setCardPosition(rowSize, gap, cardList);
 		
@@ -65,6 +69,11 @@ public class Deck {
 			cardList.get(cycle).getSprite().setPosition(x, y);
 			
 		}
+		
+		for(Card card : cardList) {
+			card.setLabelPosition(10, 10);
+		}
+		
 	}
 	
 	
@@ -105,15 +114,14 @@ public class Deck {
 	public void updateSelection() {
 		
 		if(checkPair()) {
-			
-			System.out.println("pair!");
 			cardList.remove(cardSelection[0]);
 			cardList.remove(cardSelection[1]);
 			
-			setCardPosition(rowSize, 40, cardList);
+			for(Card card : cardList) {
+				card.label = null;
+			}
 			
-			System.out.println(cardSelection[0]);
-			System.out.println(cardSelection[1]);
+			setCardPosition(rowSize, 40, cardList);
 		}
 		
 		if(cardSelection[0] != null && cardSelection[1] != null) {	
@@ -207,7 +215,6 @@ public class Deck {
 	}
 	
 	
-	
 	private void checkForNull(Card[] cardVector) throws NullPointerException{
 		
 		for (int cycle = 0; cycle < cardVector.length; cycle++) {
@@ -244,6 +251,16 @@ public class Deck {
 			Texture cardTexture = cardList.get(cycle).getTexture();
 			
 			spriteBatch.draw(cardTexture, x, y);
+			
+			
+			if(cardList.get(cycle).flipped) {	
+				String labelToDraw = cardList.get(cycle).label;
+								
+				float labelX = cardList.get(cycle).labelX;
+				float labelY = cardList.get(cycle).labelY;
+				
+				cardList.get(cycle).font.draw(spriteBatch, labelToDraw, labelX, labelY);
+			}
 		}
 	}
 	

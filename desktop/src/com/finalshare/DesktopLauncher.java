@@ -8,6 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
+		config.setMaximized(true);
+		config.setWindowSizeLimits(1024, 600, 1366, 768);
 		config.setTitle("Final's Memory Game");
 		new Lwjgl3Application(new MemoryGame(), config);
 	}

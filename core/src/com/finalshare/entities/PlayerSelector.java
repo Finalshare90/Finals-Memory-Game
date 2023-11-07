@@ -13,7 +13,7 @@ public class PlayerSelector {
 	private int rowSize, gap;
 	private Deck deck;
 	int selectionPointer = 0;
-	private Texture selectionTexture = new Texture("Sprites/card_selected.png");
+	private Texture selectionTexture = new Texture("Sprites/b_card_selected.png");
 	Sprite sprite = new Sprite(selectionTexture);
 	
 	public PlayerSelector(Deck deck, int rowSize, int gap) {
@@ -63,7 +63,7 @@ public class PlayerSelector {
 		try {
 			currentCard = deck.getCardList().get(selectionPointer);			
 			} catch (Exception e) {
-				currentCard = new Card("place holder");
+				currentCard = new Card("place holder", 10);
 			}
 		
 		
@@ -121,7 +121,6 @@ public class PlayerSelector {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			List<Card> deckCopy = deck.copyList(deck.cardListCopy);
 			
-			System.out.println("R");
 			MemoryGame.DECK_INSTANCE_CONTROLLER.remove(0);
 			MemoryGame.DECK_INSTANCE_CONTROLLER.add(deck = new Deck(deckCopy, rowSize, gap));			
 		}

@@ -49,7 +49,7 @@ project(":desktop") {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        
+        api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
     }
 }
 
@@ -62,6 +62,8 @@ project(":html") {
 
     dependencies {
         implementation project(":core")
+        implementation "com.github.intrigus.gdx-freetype-gwt:gdx-freetype-gwt:1.9.10.1"
+        implementation "com.github.intrigus.gdx-freetype-gwt:gdx-freetype-gwt:1.9.10.1:sources"
         api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
         api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
         api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
@@ -73,6 +75,7 @@ project(":core") {
 
 
     dependencies {
+        api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation fileTree(dir: 'libs', include: '*.jar')
         

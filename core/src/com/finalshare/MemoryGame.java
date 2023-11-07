@@ -37,53 +37,53 @@ public class MemoryGame extends ApplicationAdapter {
 		
 		List<Card> cardList = new ArrayList<>();
 		
-		cardList.add(new Card("1"));
-		cardList.add(new Card("2"));
+		cardList.add(new Card("1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 18));
+		cardList.add(new Card("2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 18));
 		
 		cardList.get(0).setPair(cardList.get(1));
 		
-		cardList.add(new Card("3"));
-		cardList.add(new Card("4"));
+		cardList.add(new Card("3XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 18));
+		cardList.add(new Card("4", 18));
 		
 		cardList.get(2).setPair(cardList.get(3));
 		
-		cardList.add(new Card("5"));
-		cardList.add(new Card("6"));
+		cardList.add(new Card("5", 18));
+		cardList.add(new Card("6", 18));
 		
 		cardList.get(4).setPair(cardList.get(5));
 		
-		cardList.add(new Card("7"));
-		cardList.add(new Card("8"));
+		cardList.add(new Card("7", 18));
+		cardList.add(new Card("8", 18));
 		
 		cardList.get(6).setPair(cardList.get(7));
 		
-		cardList.add(new Card("9"));
-		cardList.add(new Card("10"));
+		cardList.add(new Card("9", 18));
+		cardList.add(new Card("10",18));
 		
 		cardList.get(8).setPair(cardList.get(9));
 		
-		cardList.add(new Card("11"));
-		cardList.add(new Card("12"));
+		cardList.add(new Card("11",18));
+		cardList.add(new Card("12",18));
 		
 		cardList.get(10).setPair(cardList.get(11));
 		
-		cardList.add(new Card("13"));
-		cardList.add(new Card("14"));
+		cardList.add(new Card("13",18));
+		cardList.add(new Card("14",18));
 		
 		cardList.get(12).setPair(cardList.get(13));
 		
-		cardList.add(new Card("15"));
-		cardList.add(new Card("16"));
+		cardList.add(new Card("15",18));
+		cardList.add(new Card("16",18));
 		
 		cardList.get(14).setPair(cardList.get(15));
 		
-		deck = new Deck(cardList, 3, 40);
+		deck = new Deck(cardList, 4, 40);
 		
 		DECK_INSTANCE_CONTROLLER.add(deck);
 		
-		player = new PlayerSelector(DECK_INSTANCE_CONTROLLER.get(0), 3, 40);
+		player = new PlayerSelector(DECK_INSTANCE_CONTROLLER.get(0), 4, 40);
 		
-		cam = new OrthographicCamera(1200,1200);
+		cam = new OrthographicCamera(Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight()* 2);
 		
 		
 	}
@@ -110,16 +110,16 @@ public class MemoryGame extends ApplicationAdapter {
 	private void debugCamera() {
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-			cam.position.y++;
+			cam.position.y += 3;
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-			cam.position.y--;
+			cam.position.y-= 3;
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-			cam.position.x--;
+			cam.position.x-= 3;
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-			cam.position.x++;
+			cam.position.x+= 3;
 		}
 			
 		
