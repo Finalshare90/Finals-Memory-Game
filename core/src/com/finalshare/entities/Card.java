@@ -63,7 +63,6 @@ public class Card {
 	}	
 	
 	
-	//TODO: label mudando de posição após o restart.
 	private void fitLabel(int fontSize, int downGap) {
 		
 		String labelBufferCopy = new String(labelBuffer);

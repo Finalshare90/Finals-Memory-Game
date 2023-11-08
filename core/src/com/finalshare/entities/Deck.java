@@ -70,14 +70,20 @@ public class Deck {
 			
 		}
 		
+		setCardsComponentsPos();
+		
+	}
+	
+	private void setCardsComponentsPos() {
 		for(Card card : cardList) {
 			card.isLabelPosDefined = false;
 			card.setLabelPosition(10, 10);
 		}
-		
 	}
 	
-	
+	/*
+	 * Randomly sorts a deck.
+	 * */
 	public void sortDeck(List<Card> cardList) {
 		
 		
@@ -101,9 +107,51 @@ public class Deck {
 		
 		
 	}
-
-	public int selected = 0;
 	
+	/*
+	 * Choose a set of index positions, and sort it randomly.
+	 * Its what powers the sortDeck() "id" sorting.
+	 * */ 
+	private void genUniqueIdVec(int[] idVector, int size){
+		Random rand = new Random();
+		int idCount[]= new int[size];
+		
+		for(int cycle = 0; cycle < size; cycle++){
+			idVector[cycle] = rand.nextInt(size);
+			idCount[cycle] = 0;
+		}
+		
+		for(int cycle = 0; idVector.length > cycle; cycle++) {
+			idCount[idVector[cycle]]++;
+		}
+		
+		for(int idCycle = 0; idVector.length > idCycle; idCycle++){
+		
+			if(idCount[idVector[idCycle]] > 1) {
+				
+				Boolean isCountZero = false;
+				int countCycle = 0;
+				while(isCountZero == false){
+					if(idCount[countCycle] == 0) {
+						
+						idCount[idVector[idCycle]]--;
+						
+						idVector[idCycle] = countCycle;
+						
+						idCount[countCycle]++;
+						
+						isCountZero = true;
+					}
+					countCycle++;
+				}
+				
+			}
+		
+		}
+	}
+	
+	
+	public int selected = 0;
 	public void addSelected(Card card){
 		if(card != cardSelection[0] && card != cardSelection[1]) {
 			cardSelection[selected] = card;
@@ -111,7 +159,10 @@ public class Deck {
 		}
 		
 	}
-	
+	/*
+	 * Logical deck update, almost a render, but for 
+	 * deck logic.
+	 * */
 	public void updateSelection() {
 		
 		if(checkPair()) {
@@ -145,44 +196,10 @@ public class Deck {
 		cardSelection[1] = null;
 	}
 	
-	private void genUniqueIdVec(int[] idVector, int size){
-		Random rand = new Random();
-		int idCount[]= new int[size];
-		
-		for(int cycle = 0; cycle < size; cycle++){
-			idVector[cycle] = rand.nextInt(size);
-			idCount[cycle] = 0;
-		}
-		
-		// TODO: Optimize that iteration /^\ - \_/
-		for(int cycle = 0; idVector.length > cycle; cycle++) {
-			idCount[idVector[cycle]]++;
-		}
-		
-		for(int idCycle = 0; idVector.length > idCycle; idCycle++){
-		
-			if(idCount[idVector[idCycle]] > 1) {
-				
-				Boolean isCountZero = false;
-				int countCycle = 0;
-				while(isCountZero == false){
-					if(idCount[countCycle] == 0) {
-						
-						idCount[idVector[idCycle]]--;
-						
-						idVector[idCycle] = countCycle;
-						
-						idCount[countCycle]++;
-						
-						isCountZero = true;
-					}
-					countCycle++;
-				}
-				
-			}
-		
-		}
-	}
+	/*
+	 * Choose a set of index positions, and sort it randomly.
+	 * Its what powers the sortDeck() "id" sorting.
+	 * */ 
 	
 	private void fillBuffer(Card[] buffer) {
 		for(int cycle = 0; cycle < buffer.length; cycle++){
@@ -191,21 +208,15 @@ public class Deck {
 	}
 	
 	/*
-	 * NOTE:
-	 * CheckPair is only valid when cards already sorted with random(or arbitrary numbers).
-	 * Try using pair without a proper sorting using the sortDeck() method or without your own 
-	 * implementation of it will return inconsistent values or even Exceptions.
-	 * */ 
+	 * Safe way to check for pairs
+	 * */
 	public boolean checkPair() {
 		
-
 		try {
 			checkForNull(this.cardSelection);
 		}catch (Exception e) {
 			return false;
 		}
-		
-	
 		
 		if(this.cardSelection[0].getPair() == cardSelection[1]){
 			return true;
@@ -226,6 +237,12 @@ public class Deck {
 		
 	}
 	
+	
+	/*
+	 * Add a pair to an deck, its a default constructor abstraction.
+	 * Instead of setting multiple instances and configuring its pair manually,
+	 * you can use that method.
+	 * */
 	public void add(Card card1, Card card2) {
 		if(card1.getPair() == null || card2.getPair() == null) {
 			card1.setPair(card2);
@@ -242,6 +259,10 @@ public class Deck {
 		return cardSelection;
 	}
 	
+	
+	/*
+	 * Graphics updating
+	 * */ 
 	public void render(SpriteBatch spriteBatch) {
 		
 		for(int cycle = 0; cycle < cardList.size(); cycle++) {
