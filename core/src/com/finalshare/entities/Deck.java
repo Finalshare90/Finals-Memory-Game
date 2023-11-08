@@ -71,6 +71,7 @@ public class Deck {
 		}
 		
 		for(Card card : cardList) {
+			card.isLabelPosDefined = false;
 			card.setLabelPosition(10, 10);
 		}
 		
