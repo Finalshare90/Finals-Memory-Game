@@ -28,7 +28,7 @@ public class Deck {
 	// Starts a empty deck.
 	public Deck() {}
 	
-	/*
+	/**
 	 * Starts a Deck with a cardList and sort its cards.
 	 * Use that constructor by default.
 	 * Row size just changes the way that your cards are going to be rendered.
@@ -81,7 +81,7 @@ public class Deck {
 		}
 	}
 	
-	/*
+	/**
 	 * Randomly sorts a deck.
 	 * */
 	public void sortDeck(List<Card> cardList) {
@@ -108,7 +108,7 @@ public class Deck {
 		
 	}
 	
-	/*
+	/**
 	 * Choose a set of index positions, and sort it randomly.
 	 * Its what powers the sortDeck() "id" sorting.
 	 * */ 
@@ -159,7 +159,7 @@ public class Deck {
 		}
 		
 	}
-	/*
+	/**
 	 * Logical deck update, almost a render, but for 
 	 * deck logic.
 	 * */
@@ -196,7 +196,7 @@ public class Deck {
 		cardSelection[1] = null;
 	}
 	
-	/*
+	/**
 	 * Choose a set of index positions, and sort it randomly.
 	 * Its what powers the sortDeck() "id" sorting.
 	 * */ 
@@ -207,7 +207,7 @@ public class Deck {
 		}
 	}
 	
-	/*
+	/**
 	 * Safe way to check for pairs
 	 * */
 	public boolean checkPair() {
@@ -238,7 +238,7 @@ public class Deck {
 	}
 	
 	
-	/*
+	/**
 	 * Add a pair to an deck, its a default constructor abstraction.
 	 * Instead of setting multiple instances and configuring its pair manually,
 	 * you can use that method.
@@ -260,7 +260,7 @@ public class Deck {
 	}
 	
 	
-	/*
+	/**
 	 * Graphics updating
 	 * */ 
 	public void render(SpriteBatch spriteBatch) {
