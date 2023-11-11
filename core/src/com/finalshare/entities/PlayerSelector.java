@@ -15,8 +15,10 @@ public class PlayerSelector {
 	int selectionPointer = 0;
 	private Texture selectionTexture = new Texture("Sprites/b_card_selected.png");
 	Sprite sprite = new Sprite(selectionTexture);
+	ConfigParser configs;
 	
-	public PlayerSelector(Deck deck, int rowSize, int gap) {
+	public PlayerSelector(Deck deck, int rowSize, int gap, ConfigParser configs) {
+		this.configs = configs;
 		this.deck = deck;
 		this.rowSize = rowSize;
 		this.gap = gap;
@@ -119,7 +121,10 @@ public class PlayerSelector {
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-			List<Card> deckCopy = deck.copyList(deck.cardListCopy);
+			
+			configs.restart();
+			
+			List<Card> deckCopy = configs.cardList;
 			
 			MemoryGame.DECK_INSTANCE_CONTROLLER.remove(0);
 			MemoryGame.DECK_INSTANCE_CONTROLLER.add(deck = new Deck(deckCopy, rowSize, gap));			
