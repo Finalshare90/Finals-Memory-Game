@@ -84,7 +84,10 @@ public class Card {
 			}
 		}
 		
-		labelLineBuffer.add(Character.toString(labelChars[labelChars.length-1]));
+		
+		labelLineBuffer.add(combineCharList(labelCharsBuffer));
+		//labelLineBuffer.add(Character.toString(labelChars[labelChars.length-1]));
+		
 		
 		labelBuffer = combineStringList(labelLineBuffer);
 	

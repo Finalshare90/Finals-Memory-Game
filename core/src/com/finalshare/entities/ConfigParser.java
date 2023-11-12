@@ -67,9 +67,36 @@ public class ConfigParser {
 		
 		for(int dataCycle = 0; dataCycle < tag.data.size(); dataCycle++) {
 			switch (tag.data.get(dataCycle)) {
+			
 			case "label=":
 				dataCycle++;
-				definitions[0] = tag.data.get(dataCycle);
+
+				String labelBuffer = tag.data.get(dataCycle) + " "; 
+				
+				
+				
+				if(tag.data.get(dataCycle).contains("\"")) {
+					
+					int quoteCount = 1;
+
+					dataCycle++;
+					
+					while (quoteCount != 2) {	
+						
+						labelBuffer = labelBuffer + tag.data.get(dataCycle) + " ";
+
+						if(tag.data.get(dataCycle).contains("\"")) {
+							quoteCount++;
+							break;
+							
+						}else{
+							dataCycle++;
+						}
+						
+					}
+				}
+				
+				definitions[0] = labelBuffer;
 				break;
 				
 			case "pair=":
