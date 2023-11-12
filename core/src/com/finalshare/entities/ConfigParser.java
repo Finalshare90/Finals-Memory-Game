@@ -10,9 +10,10 @@ import com.kogaplanet.lunarlatteMarkupLanguage.api.*;
 public class ConfigParser {
 
 	
-	TagHandler handler = new TagHandler();
-	String fileName;
+	private TagHandler handler = new TagHandler();
+	private String fileName;
 	public List<Card> cardList = new ArrayList<>();
+	public int rows, gap;
 	
 	public ConfigParser(String fileName) {
 		handler.parserInit(new Parser(fileName));
@@ -35,19 +36,23 @@ public class ConfigParser {
 			
 			Card pair, newCard;
 			
-			Object[] cardDefinitions = parseDefinitions(currentTag);
+			Object[] cardDefs = parseCardDefinitions(currentTag);
 			
-			newCard = new Card((String)cardDefinitions[0], Integer.parseInt((String)cardDefinitions[1]));
+			newCard = new Card((String)cardDefs[0], Integer.parseInt((String)cardDefs[1]));
 
 			cardList.add(newCard);
 			
-			if(cardDefinitions[2] != null) {
-				pair = (Card)cardDefinitions[2];
+			if(cardDefs[2] != null) {
+				pair = (Card)cardDefs[2];
 				cardList.add(pair);
 				newCard.setPair(pair);
 			}				
 		}
 		
+		int[] deckDefs = parseDeckDefinitions(deckTag);
+		
+		gap = deckDefs[0];
+		rows = deckDefs[1];
 	}
 	
 	
@@ -55,7 +60,7 @@ public class ConfigParser {
 	 * @return Definitions of a card, 0 = label; 1 = fontSize; 2 = pair; 
 	 * Cast it to the desired type.
 	 * */
-	private Object[] parseDefinitions(TagNode tag) {
+	private Object[] parseCardDefinitions(TagNode tag) {
 	
 		Object[] definitions = new Object[3];
 		
@@ -71,7 +76,7 @@ public class ConfigParser {
 				dataCycle++;
 				
 				TagNode pairNode = handler.call("deck").children.get(tag.data.get(dataCycle));
-				Object[] pairDef = parseDefinitions(pairNode);
+				Object[] pairDef = parseCardDefinitions(pairNode);
 				
 				cardCycle++;
 				
@@ -90,6 +95,29 @@ public class ConfigParser {
 		return definitions;
 	}
 	
+	/**
+	 * @return Definitions of a deck, 0 = gap; 1 = rows;
+	 * */
+	private int[] parseDeckDefinitions(TagNode tag) {
+		
+		int[] definitions = new int[2];
+	
+		for(int dataCycle = 0; dataCycle < tag.data.size(); dataCycle++) {
+			switch(tag.data.get(dataCycle)) {
+				case "gap=":
+					dataCycle++;
+					definitions[0] = Integer.parseInt(tag.data.get(dataCycle));
+					break;
+					
+				case "rows=":
+					dataCycle++;
+					definitions[1] = Integer.parseInt(tag.data.get(dataCycle));
+					break;
+			}	
+		}
+		
+		return definitions;
+	}
 	
 	
 	public void restart() {

@@ -126,6 +126,9 @@ public class PlayerSelector {
 			
 			List<Card> deckCopy = configs.cardList;
 			
+			rowSize = configs.rows;
+			gap = configs.gap;
+			
 			MemoryGame.DECK_INSTANCE_CONTROLLER.remove(0);
 			MemoryGame.DECK_INSTANCE_CONTROLLER.add(deck = new Deck(deckCopy, rowSize, gap));			
 		}

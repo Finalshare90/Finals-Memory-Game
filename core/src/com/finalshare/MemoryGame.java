@@ -39,7 +39,7 @@ public class MemoryGame extends ApplicationAdapter {
 		configs = new ConfigParser("deck.3ml");
 		configs.start();
 		
-		deck = new Deck(configs.cardList, 4, 40);
+		deck = new Deck(configs.cardList, configs.rows, configs.gap);
 		
 		DECK_INSTANCE_CONTROLLER.add(deck);
 		
@@ -47,6 +47,8 @@ public class MemoryGame extends ApplicationAdapter {
 		
 		cam = new OrthographicCamera(Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight()* 2);
 		
+		cam.position.x = 861;
+		cam.position.y = -309;
 		
 	}
 	
@@ -56,9 +58,7 @@ public class MemoryGame extends ApplicationAdapter {
 		ScreenUtils.clear(Color.valueOf("#20394F"));
 		debugCamera();
 		cam.update();
-		
-		//System.out.println(deck.getSelection());
-		
+				
 		batch.setProjectionMatrix(cam.combined);
 		
 		player.update();
