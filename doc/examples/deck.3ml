@@ -1,0 +1,71 @@
+
+// Not mandatory, but its a good practice to
+// use a single constant for sizes:)
+[define
+    [size fontSize= 15 end]
+end]
+
+[deck
+    gap= 10
+    rows= 3
+
+    [card1
+        $define>size    
+        pair= card2 
+        label= "Who was the last Tsar of Russia?"
+    end]
+    
+    [card2
+        $define>size
+        label= "Nicholas II"     
+    end]
+    
+    
+    [card3
+        $define>size    
+        pair= card4 
+        label= "What is considered the largest empire in history?"
+    end]
+    
+    [card4
+        $define>size
+        label= "Mongol Empire."    
+    end]
+
+
+    [card5
+        $define>size    
+        pair= card6 
+        label= "Who was the first ruler of the Mongol Empire?"
+    end]
+    
+    [card6
+        $define>size
+        label= "Genghis Khan"
+    end]
+
+
+    [card7
+        $define>size    
+        pair= card8 
+        label= "Where did Albert Einstein live before moving to the United States?"           
+    end]
+    
+    [card8
+        $define>size
+        label= Germany
+    end]
+
+
+    [card9
+        $define>size    
+        pair= card10 
+        label= "During which war was a Christmas Truce called?"
+    end]
+    
+    [card10
+        $define>size
+        label= WW1   
+    end]
+
+end]
