@@ -276,12 +276,24 @@ public class Deck {
 			
 			
 			if(cardList.get(cycle).flipped) {	
+				
+				Card currentCard = cardList.get(cycle);
 				String labelToDraw = cardList.get(cycle).label;
 								
-				float labelX = cardList.get(cycle).labelX;
-				float labelY = cardList.get(cycle).labelY;
+				float labelX = currentCard.labelX;
+				float labelY = currentCard.labelY;
 				
-				cardList.get(cycle).font.draw(spriteBatch, labelToDraw, labelX, labelY);
+				if(currentCard.fixtureSprite != null) {
+					float fixtureX, fixtureY;
+					
+					fixtureX = currentCard.getSprite().getX() + currentCard.getSprite().getHeight() / 2;
+					fixtureY = currentCard.getSprite().getY();
+					
+					currentCard.fixtureSprite.setPosition(fixtureX, fixtureY);
+					currentCard.fixtureSprite.draw(spriteBatch);
+				}
+				
+				currentCard.font.draw(spriteBatch, labelToDraw, labelX, labelY);
 			}
 		}
 	}

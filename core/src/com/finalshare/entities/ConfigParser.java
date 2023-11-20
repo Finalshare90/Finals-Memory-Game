@@ -3,6 +3,7 @@ package com.finalshare.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.kogaplanet.lunarlatteMarkupLanguage.Parser;
 import com.kogaplanet.lunarlatteMarkupLanguage.TagNode;
 import com.kogaplanet.lunarlatteMarkupLanguage.api.*;
@@ -33,13 +34,17 @@ public class ConfigParser {
 		for(cardCycle = 0; cardCycle < identifiers.size(); cardCycle++) {
 			TagNode currentTag = deckTag.children.get(identifiers.get(cardCycle));
 			
-			
 			Card pair, newCard;
+			
 			
 			Object[] cardDefs = parseCardDefinitions(currentTag);
 			
-			newCard = new Card((String)cardDefs[0], Integer.parseInt((String)cardDefs[1]));
-
+			if(cardDefs[3] == null) {
+				newCard = new Card((String)cardDefs[0], Integer.parseInt((String)cardDefs[1]));
+			}else {
+				newCard = new Card((String)cardDefs[0], Integer.parseInt((String)cardDefs[1]), new Texture((String)cardDefs[3]));
+			}
+			
 			cardList.add(newCard);
 			
 			if(cardDefs[2] != null) {
@@ -57,12 +62,12 @@ public class ConfigParser {
 	
 	
 	/**
-	 * @return Definitions of a card, 0 = label; 1 = fontSize; 2 = pair; 
+	 * @return Definitions of a card, 0 = label; 1 = fontSize; 2 = pair, 3 = fixture path; 
 	 * Cast it to the desired type.
 	 * */
 	private Object[] parseCardDefinitions(TagNode tag) {
 	
-		Object[] definitions = new Object[3];
+		Object[] definitions = new Object[4];
 		
 		
 		for(int dataCycle = 0; dataCycle < tag.data.size(); dataCycle++) {
@@ -115,7 +120,11 @@ public class ConfigParser {
 				dataCycle++;
 				definitions[1] = tag.data.get(dataCycle);
 				break;
-				
+			
+			case "img=":
+				dataCycle++;
+				definitions[3] = tag.data.get(dataCycle);
+				break;
 			}
 		}
 		

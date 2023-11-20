@@ -13,7 +13,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 
 
 public class Card {
-
+	
+	private Texture fixtureTexture;
+	public Sprite fixtureSprite;
+	
 	private Texture front = new Texture("Sprites/b_card_front.png"), back = new Texture("Sprites/b_card_back.png");
 	public boolean flipped = false;
 	private String labelBuffer;
@@ -26,6 +29,7 @@ public class Card {
 	private int id;
 	public float labelX, labelY;
 	boolean isLabelPosDefined = false;
+	
 	
 	public Card(String label, int labelFontSize) {
 		this.labelBuffer = label;
@@ -40,6 +44,16 @@ public class Card {
 		setPair(card);
 		
 	}
+	
+	public Card(String label, int labelFontSize , Texture fixtureTexture){
+		this(label, labelFontSize);
+		
+		
+		this.fixtureTexture = fixtureTexture;
+		fixtureSprite = new Sprite(fixtureTexture);
+		fixtureSprite.setSize(getTexture().getWidth() / 2, getTexture().getWidth() / 2);
+	}
+	
 	
 	public Sprite getSprite() {
 		
@@ -75,7 +89,7 @@ public class Card {
 
 		for(int cycle = 0; cycle < labelChars.length; cycle++) {
 				
-			if(labelCharsBuffer.size() * fontSize < getTexture().getWidth()) {
+			if(labelCharsBuffer.size() * fontSize < getTexture().getWidth()*1.7) {
 				labelCharsBuffer.add(labelChars[cycle]);
 			}else {
 				labelLineBuffer.add(combineCharList(labelCharsBuffer) + "\n");
