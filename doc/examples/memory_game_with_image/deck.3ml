@@ -1,0 +1,62 @@
+[deck
+    rows= 3
+    gap= 10
+
+    [card1
+        label= " "
+        fontSize= 10
+        img= hollow.png
+        pair= card2
+    end] 
+
+    [card2
+        label= " "
+        fontSize= 10
+        img= hollow.png
+    end]
+
+
+    [card3
+        label= " "
+        fontSize= 10
+        img= cat.png
+        pair= card4
+    end]
+
+    [card4
+        label= " "
+        fontSize= 10
+        img= cat.png
+        
+    end]
+
+    [card5
+        label= " "
+        fontSize= 10
+        img= feline.png
+        pair= card6
+    end]
+
+
+    [card6
+        label= " "
+        fontSize= 10
+        img= feline.png
+    end]
+
+
+    [card7
+        label= " "
+        fontSize= 10
+        img= lion.png
+        pair= card8
+    end]
+
+    
+    [card8
+        label= " "
+        fontSize= 10
+        img= lion.png
+    end]
+
+end]

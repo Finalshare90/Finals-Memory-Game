@@ -116,8 +116,9 @@ Thumbs.db
 ## 3ml
 *.3ml
 !/doc/*.3ml
-!/doc/*/*.3ml
-
+!/doc/examples/*.3ml
+!/doc/examples/memory_game_with_image/*.3ml
+!/doc/examples/quiz_memory_game/*.3ml
 
 ## assets
 /desktop/*.png
