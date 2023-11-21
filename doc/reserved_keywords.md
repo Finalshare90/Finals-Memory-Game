@@ -77,3 +77,13 @@ end]
 // ... 
 end]
 ```
+## img
+> Defines a path to a image in FMG (Final's memory game) root directory.
+```
+[card1
+	label= myCard
+	fontSize= 10
+	img= assets/cat.png
+// ... 
+end]
+```
