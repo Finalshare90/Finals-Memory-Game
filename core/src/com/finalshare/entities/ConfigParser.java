@@ -112,7 +112,11 @@ public class ConfigParser {
 				
 				cardCycle++;
 				
-				definitions[2] = new Card((String)pairDef[0],  Integer.parseInt((String)pairDef[1]));
+				if(pairDef[3] != null) {
+					definitions[2] = new Card((String)pairDef[0],  Integer.parseInt((String)pairDef[1]), new Texture((String)pairDef[3]));
+				}else {
+					definitions[2] = new Card((String)pairDef[0],  Integer.parseInt((String)pairDef[1]));
+				}
 				
 				break;
 			
