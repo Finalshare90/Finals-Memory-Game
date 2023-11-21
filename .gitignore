@@ -116,7 +116,8 @@ Thumbs.db
 ## 3ml
 *.3ml
 !/doc/*.3ml
-!/doc/examples/*.3ml
+!/doc/*/*.3ml
+
 
 ## assets
 /desktop/*.png
